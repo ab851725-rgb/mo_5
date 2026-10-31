@@ -10,6 +10,7 @@ from .serializers import(
     ProductSerializer,
     ReviewDetailSerializer,
     ReviewSerializer,
+    ProductReviewSerializer,
 )     
 
 @api_view(['GET'])
@@ -59,3 +60,9 @@ def review_list_api_view(request):
     reviews = Review.objects.all()
     list_ = ReviewSerializer(reviews, many=True).data
     return Response(data=list_)
+
+@api_view(['GET'])
+def products_reviews_api_view(request):
+    products = Product.objects.all()
+    data = ProductReviewSerializer(products, many=True).data
+    return Response(data=data)
